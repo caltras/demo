@@ -1,0 +1,42 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'org.sonarqube' version '2.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
+def gitBranch() {
+	def branch = ""
+	def proc = "git rev-parse --abbrev-ref HEAD".execute()
+	proc.in.eachLine { line -> branch = line }
+	proc.err.eachLine { line -> println line }
+	proc.waitFor()
+	branch
+}
+
+sonarqube {
+	properties {
+		property 'sonar.host.url', 'https://sonarqube.blackline-dev.com'
+		property 'sonar.login', 'ab7cff19489a7b21b8b06f5a96b184226f1a3cbc'
+		property 'sonar.projectKey', 'demo'
+		property 'sonar.projectVersion', (System.env.NEXT_VERSION?:
+				System.env.CODEBUILD_GIT_BRANCH?:
+						gitBranch())
+	}
+}
