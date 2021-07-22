@@ -34,10 +34,10 @@ sonarqube {
 	properties {
 		property 'sonar.host.url', 'https://sonarcloud.io'
 		property "sonar.organization", "caltras"
-		property 'sonar.login', '06b604928ed2a1cc3bb38dd9a9f36da398e04720'
-		property 'sonar.projectKey', 'demo'
-		property 'sonar.projectVersion', (System.env.NEXT_VERSION?:
-				System.env.CODEBUILD_GIT_BRANCH?:
-						gitBranch())
+//		property 'sonar.login', '06b604928ed2a1cc3bb38dd9a9f36da398e04720'
+		property 'sonar.projectKey', 'caltras_demo'
+//		property 'sonar.projectVersion', (System.env.NEXT_VERSION?:
+//				System.env.CODEBUILD_GIT_BRANCH?:
+//						gitBranch())
 	}
 }
