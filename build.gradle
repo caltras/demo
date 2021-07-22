@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id 'org.sonarqube' version '2.7'
+	id 'org.sonarqube' version "3.3"
 }
 
 group = 'com.example'
@@ -32,8 +32,9 @@ def gitBranch() {
 
 sonarqube {
 	properties {
-		property 'sonar.host.url', 'https://sonarqube.blackline-dev.com'
-		property 'sonar.login', 'ab7cff19489a7b21b8b06f5a96b184226f1a3cbc'
+		property 'sonar.host.url', 'https://sonarcloud.io'
+		property "sonar.organization", "caltras"
+		property 'sonar.login', '06b604928ed2a1cc3bb38dd9a9f36da398e04720'
 		property 'sonar.projectKey', 'demo'
 		property 'sonar.projectVersion', (System.env.NEXT_VERSION?:
 				System.env.CODEBUILD_GIT_BRANCH?:
